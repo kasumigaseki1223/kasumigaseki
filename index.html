@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>警視庁ポータルサイト</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 全体設定 */
+        :root {
+            --primary-blue: #1e3668;
+            --secondary-blue: #2a4a8a;
+            --accent-yellow: #ffcc00;
+            --dark-blue: #0d2a5c;
+            --light-gray: #f5f5f5;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #666666;
+            --red: #d90000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "メイリオ", Meiryo, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            color: #333;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ヘッダー */
+        .header-top {
+            background-color: var(--primary-blue);
+            color: #fff;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .header-top a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        .header-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+            color: var(--accent-yellow);
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-blue);
+            line-height: 1.2;
+        }
+
+        .logo-subtext {
+            font-size: 12px;
+            display: block;
+            font-weight: normal;
+            color: var(--dark-gray);
+        }
+
+        .header-search {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-search input {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            width: 220px;
+            font-size: 14px;
+        }
+
+        .header-search button {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin-left: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .header-search button:hover {
+            background: var(--secondary-blue);
+        }
+
+        /* グローバルナビ */
+        .global-nav {
+            background: var(--secondary-blue);
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .global-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 22px;
+            font-size: 14px;
+            display: block;
+            border-right: 1px solid var(--dark-blue);
+            text-align: center;
+            min-width: 120px;
+            transition: background 0.3s;
+        }
+
+        .global-nav a:last-child {
+            border-right: none;
+        }
+
+        .global-nav a:hover {
+            background: var(--dark-blue);
+        }
+
+        /* メインビジュアル */
+        .main-visual {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://images.unsplash.com/photo-1586769852044-692d6e3703f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover;
+            height: 350px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .main-visual h1 {
+            font-size: 36px;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+            max-width: 800px;
+            line-height: 1.4;
+        }
+
+        /* コンテンツエリア */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .main-content {
+            flex: 3;
+            margin-right: 30px;
+        }
+
+        .side-content {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: var(--primary-blue);
+            border-left: 5px solid var(--primary-blue);
+            padding: 8px 15px;
+            margin: 25px 0 20px;
+            font-weight: bold;
+        }
+
+        .news-list {
+            list-style: none;
+        }
+
+        .news-list li {
+            padding: 12px 0;
+            border-bottom: 1px dashed #ccc;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .news-list time {
+            color: var(--dark-gray);
+            font-size: 12px;
+            margin-right: 15px;
+            min-width: 90px;
+            display: inline-block;
+        }
+
+        .topic-box {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            background: var(--light-gray);
+        }
+
+        .topic-title {
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: var(--red);
+            font-size: 16px;
+        }
+
+        .btn-more {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            text-decoration: none;
+            padding: 6px 18px;
+            font-size: 13px;
+            margin-top: 15px;
+            border-radius: 3px;
+            transition: background 0.3s;
+        }
+
+        .btn-more:hover {
+            background: var(--secondary-blue);
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .quick-link {
+            background: var(--light-gray);
+            border: 1px solid #ccc;
+            padding: 15px 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            transition: all 0.3s;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .quick-link i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+        }
+
+        .quick-link:hover {
+            background: var(--medium-gray);
+            transform: translateY(-3px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        /* ページ共通スタイル */
+        .page {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        /* 認証ページ */
+        .auth-container {
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 40px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .auth-title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--primary-blue);
+            font-size: 26px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-blue);
+        }
+
+        .auth-message {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .input-group {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .input-group input {
+            padding: 14px;
+            width: 100%;
+            max-width: 300px;
+            border: 2px solid #ccc;
+            font-size: 18px;
+            border-radius: 8px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30, 54, 104, 0.2);
+        }
+
+        .btn-auth {
+            display: block;
+            margin: 35px auto;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 14px 45px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .btn-auth:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .alert {
+            background: #ffeaea;
+            border: 1px solid var(--red);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            display: none;
+            color: var(--red);
+            text-align: center;
+        }
+
+        /* 検索ページ */
+        .search-container {
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 40px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .search-title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--primary-blue);
+            font-size: 26px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-blue);
+        }
+
+        .search-description {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        .search-form {
+            background: var(--light-gray);
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        /* ファイルページ */
+        .file-container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 40px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .file-title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--primary-blue);
+            font-size: 26px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-blue);
+        }
+
+        .case-info {
+            background: var(--light-gray);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .case-info p {
+            margin-bottom: 10px;
+        }
+
+        .file-upload {
+            margin: 30px 0;
+            padding: 25px;
+            background: var(--light-gray);
+            border-radius: 10px;
+            border: 2px dashed #ccc;
+        }
+
+        .file-preview {
+            margin-top: 30px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 25px;
+            background: white;
+        }
+
+        .file-preview h3 {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            font-size: 20px;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            background: #fafafa;
+            transition: transform 0.3s;
+        }
+
+        .file-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .file-icon {
+            font-size: 32px;
+            color: var(--primary-blue);
+            margin-right: 15px;
+            width: 40px;
+            text-align: center;
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .file-meta {
+            color: var(--dark-gray);
+            font-size: 13px;
+        }
+
+        .file-actions {
+            margin-left: 15px;
+        }
+
+        .btn-download {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-download i {
+            margin-right: 5px;
+        }
+
+        .btn-download:hover {
+            background: var(--secondary-blue);
+        }
+
+        .btn-back {
+            background: var(--dark-gray);
+            margin-top: 20px;
+        }
+
+        .btn-back:hover {
+            background: #777;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* フッター */
+        .footer-nav {
+            background: var(--secondary-blue);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0 15px;
+            border-right: 1px solid #fff;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .footer-nav a:last-child {
+            border-right: none;
+        }
+
+        .footer-bottom {
+            background: var(--primary-blue);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            font-size: 13px;
+        }
+
+        .footer-address {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .demo-notice {
+            background: var(--accent-yellow);
+            color: #333;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .demo-hint {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* レスポンシブデザイン */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .main-content {
+                margin-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .global-nav a {
+                flex: 1 0 33.333%;
+                border-bottom: 1px solid var(--dark-blue);
+            }
+            
+            .global-nav a:nth-child(3n) {
+                border-right: none;
+            }
+            
+            .main-visual h1 {
+                font-size: 28px;
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header-main {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-search {
+                margin-top: 15px;
+                width: 100%;
+            }
+            
+            .header-search input {
+                width: 100%;
+            }
+            
+            .global-nav a {
+                flex: 1 0 50%;
+            }
+            
+            .global-nav a:nth-child(2n) {
+                border-right: none;
+            }
+            
+            .main-visual {
+                height: 250px;
+            }
+            
+            .main-visual h1 {
+                font-size: 22px;
+            }
+            
+            .auth-container,
+            .search-container,
+            .file-container {
+                margin: 30px auto;
+                padding: 25px;
+            }
+            
+            .footer-nav a {
+                flex: 1 0 100%;
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.3);
+                padding: 10px 0;
+            }
+        }
+
+        /* アニメーション */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 通知 -->
+    <div class="demo-notice">
+        警視庁
+    </div>
+    
+    <!-- ページ1: 認証コード入力 -->
+    <div id="page1" class="page active">
+        <div class="auth-container">
+            <h2 class="auth-title">
+                <i class="fas fa-shield-alt"></i> 警視庁 機密情報閲覧システム
+            </h2>
+            <p class="auth-message">不正アクセスを防止するため、認証コードの入力をお願いします。</p>
+            
+            <div class="input-group">
+                <input type="text" id="authCode" placeholder="認証コードを入力" maxlength="4">
+            </div>
+            
+            <button class="btn-auth" id="authButton">
+                <i class="fas fa-lock"></i> 認証
+            </button>
+            
+            <div id="authError" class="alert">
+                <i class="fas fa-exclamation-circle"></i> 不正な認証コードです。正しいコードを入力してください。
+            </div>
+            
+            <div class="demo-hint">
+                <p> <strong></strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ページ2: 警視庁公式サイト -->
+    <div id="page2" class="page">
+        <!-- ヘッダートップ -->
+        <div class="header-top">
+            <div class="header-links">
+                <a href="#" class="nav-link"><i class="fas fa-sitemap"></i> サイトマップ</a>
+                <a href="#" class="nav-link"><i class="fas fa-globe"></i> English</a>
+                <a href="#" class="nav-link"><i class="fas fa-text-height"></i> 文字サイズ</a>
+            </div>
+            <div class="header-date" id="currentDate">
+                <!-- JSで日付を挿入 -->
+            </div>
+        </div>
+        
+        <!-- メインヘッダー -->
+        <div class="header-main">
+            <div class="logo">
+                <i class="fas fa-shield-alt logo-icon"></i>
+                <div class="logo-text">
+                    警視庁
+                    <span class="logo-subtext">Tokyo Metropolitan Police Department</span>
+                </div>
+            </div>
+            
+            <div class="header-search">
+                <input type="text" placeholder="サイト内検索">
+                <button class="nav-link"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        
+        <!-- グローバルナビゲーション -->
+        <div class="global-nav">
+            <a href="#" class="nav-link"><i class="fas fa-home"></i> トップ</a>
+            <a href="#" class="nav-link"><i class="fas fa-bullhorn"></i> お知らせ・行事</a>
+            <a href="#" class="nav-link"><i class="fas fa-file-alt"></i> 届出・相談</a>
+            <a href="#" class="nav-link"><i class="fas fa-exclamation-triangle"></i> 犯罪情報・交通安全</a>
+            <a href="#" class="nav-link"><i class="fas fa-info-circle"></i> 警視庁の紹介</a>
+            <a href="#" class="nav-link"><i class="fas fa-map-marker-alt"></i> 各警察署</a>
+            <a href="#" class="nav-link"><i class="fas fa-sitemap"></i> サイトマップ</a>
+        </div>
+        
+        <!-- メインビジュアル -->
+        <div class="main-visual">
+            <h1>安全・安心の東京を目指して<br>地域に根ざした警察活動を推進</h1>
+        </div>
+        
+        <!-- メインコンテンツ -->
+        <div class="container">
+            <div class="main-content">
+                <h3 class="section-title">お知らせ</h3>
+                <ul class="news-list" id="newsList">
+                    <!-- ニュースは動的に生成 -->
+                </ul>
+                <a href="#" class="btn-more nav-link">一覧を見る <i class="fas fa-arrow-right"></i></a>
+                
+                <h3 class="section-title">行事予定</h3>
+                <div class="topic-box">
+                    <div class="topic-title">警察署一日署長行事 <span id="eventDate1"></span></div>
+                    <p><span id="eventDateFull1"></span> 渋谷警察署にて一日署長行事を開催します。地域住民との交流を通じた防犯啓発活動を行います。</p>
+                    <a href="#" class="btn-more nav-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="topic-box">
+                    <div class="topic-title">交通安全フェア <span id="eventDate2"></span></div>
+                    <p><span id="eventDateFull2"></span> 代々木公園にて交通安全フェアを開催します。子ども向けの交通安全教室や高齢者向けの運転相談コーナーを設置します。</p>
+                    <a href="#" class="btn-more nav-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="side-content">
+                <h3 class="section-title">緊急情報</h3>
+                <div class="topic-box" style="border-color: var(--red);">
+                    <div class="topic-title">振り込め詐欺注意報発令中</div>
+                    <p>高齢者を対象とした特殊詐欺が多発しています。不審な電話には「すぐに切る」「家族や警察に相談する」を徹底してください。</p>
+                    <a href="#" class="btn-more nav-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <h3 class="section-title">トピックス</h3>
+                <div class="topic-box">
+                    <div class="topic-title">警視庁公式アプリのご案内</div>
+                    <p>警視庁公式アプリをリリースしました。犯罪情報や防犯情報をリアルタイムで配信しています。ぜひご活用ください。</p>
+                    <a href="#" class="btn-more nav-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="topic-box">
+                    <div class="topic-title">警察官採用情報</div>
+                    <p>令和5年度警視庁警察官採用試験の案内を掲載しています。採用説明会の日程や試験内容についてご確認ください。</p>
+                    <a href="#" class="btn-more nav-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <h3 class="section-title">よくあるご相談</h3>
+                <div class="quick-links">
+                    <a href="#" class="quick-link nav-link">
+                        <i class="fas fa-key"></i>
+                        <span>遺失物・拾得物</span>
+                    </a>
+                    <a href="#" class="quick-link nav-link">
+                        <i class="fas fa-car-crash"></i>
+                        <span>交通事故相談</span>
+                    </a>
+                    <a href="#" class="quick-link nav-link">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>防犯相談</span>
+                    </a>
+                    <a href="#" class="quick-link nav-link">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>サイバー犯罪相談</span>
+                    </a>
+                    <a href="#" class="quick-link nav-link">
+                        <i class="fas fa-user-secret"></i>
+                        <span>ストーカー対策</span>
+                    </a>
+                    <a href="#" class="quick-link nav-link">
+                        <i class="fas fa-child"></i>
+                        <span>少年相談</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- フッター -->
+        <div class="footer-nav">
+            <a href="#" class="nav-link">組織案内</a>
+            <a href="#" class="nav-link">採用情報</a>
+            <a href="#" class="nav-link">会議情報</a>
+            <a href="#" class="nav-link">統計・資料</a>
+            <a href="#" class="nav-link">政策・条例</a>
+            <a href="#" class="nav-link">申請・手続き</a>
+            <a href="#" class="nav-link">個人情報保護方針</a>
+            <a href="#" class="nav-link">アクセシビリティ方針</a>
+            <a href="#" class="nav-link">著作権・リンクについて</a>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-address">
+                〒100-8929 東京都千代田区霞が関2-1-1<br>
+                電話: 03-3581-4321（代表）
+            </div>
+            <div>Copyright © Metropolitan Police Department. All Rights Reserved.</div>
+        </div>
+    </div>
+
+    <!-- ページ3: 情報検索ページ -->
+<div id="page3" class="page">
+    <div class="search-container">
+        <h2 class="search-title">
+            <i class="fas fa-search"></i> 機密情報検索システム
+        </h2>
+        <p class="search-description">
+            案件番号を入力して検索を実行してください
+        </p>
+        
+        <div class="search-form">
+            <div class="form-group">
+                <label for="searchCode">検索番号</label>
+                <input type="text" id="searchCode" placeholder="例: 1234">
+            </div>
+            
+            <button class="btn-auth" id="searchButton">
+                <i class="fas fa-search"></i> 検索実行
+            </button>
+            
+            <div id="searchError" class="alert">
+                <i class="fas fa-exclamation-circle"></i> 無効な検索番号です。正しい番号を入力してください。
+            </div>
+            
+            <div class="demo-hint">
+                <p> <strong></strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- ページ4: 添付ファイル表示ページ -->
+    <div id="page4" class="page">
+        <div class="file-container">
+            <h2 class="file-title">
+                <i class="fas fa-file-alt"></i> 機密ファイル閲覧
+            </h2>
+            
+            <div class="case-info">
+                <p><strong>案件ID:</strong> <span id="caseId">2023-4238</span></p>
+                <p><strong>案件名:</strong> 特殊詐欺事件捜査資料</p>
+                <p><strong>作成日:</strong> <span id="fileDate">2023年10月15日</span></p>
+                <p><strong>担当:</strong> 刑事部捜査二課　 特殊詐欺対策課</p>
+                <p><strong>ステータス:</strong> 捜査中</p>
+            </div>
+            
+            <div class="file-upload">
+                <h3>
+                    <i class="fas fa-upload"></i> 新規ファイル添付
+                </h3>
+                <div class="form-group">
+                    <input type="file" id="fileInput">
+                </div>
+            </div>
+            
+            <div class="file-preview">
+                <h3><i class="fas fa-file"></i> 表示中のファイル</h3>
+                <div id="filePreview">
+                    <div class="file-item">
+                        <div class="file-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="file-info">
+                            <div class="file-name">捜査報告書_<span id="reportDate"></span>.pdf</div>
+                            <div class="file-meta">PDFドキュメント・2.3MB</div>
+                        </div>
+                        <div class="file-actions">
+                            <button class="btn-download">
+                                <i class="fas fa-download"></i> ダウンロード
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="file-item">
+                        <div class="file-icon">
+                            <i class="fas fa-file-excel"></i>
+                        </div>
+                        <div class="file-info">
+                            <div class="file-name">被害者リスト_<span id="victimDate"></span>.xlsx</div>
+                            <div class="file-meta">Excelスプレッドシート・1.1MB</div>
+                        </div>
+                        <div class="file-actions">
+                            <button class="btn-download">
+                                <i class="fas fa-download"></i> ダウンロード
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="file-item">
+                        <div class="file-icon">
+                            <i class="fas fa-file-image"></i>
+                        </div>
+                        <div class="file-info">
+                            <div class="file-name">関連人物_写真01.jpg</div>
+                            <div class="file-meta">JPEG画像・850KB</div>
+                        </div>
+                        <div class="file-actions">
+                            <button class="btn-download">
+                                <i class="fas fa-download"></i> ダウンロード
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn-auth btn-back" id="backButton">
+                    <i class="fas fa-home"></i> トップに戻る
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ページ遷移関数
+        function navigate(pageNum) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(`page${pageNum}`).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // 認証コードチェック
+        function checkAuthCode() {
+            const code = document.getElementById('authCode').value;
+            if(code === '6752') {
+                document.getElementById('authError').style.display = 'none';
+                navigate(2);
+            } else {
+                document.getElementById('authError').style.display = 'block';
+                
+                // 入力フィールドを揺らすアニメーション
+                const input = document.getElementById('authCode');
+                input.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    input.style.animation = '';
+                }, 500);
+            }
+        }
+
+       // 検索番号チェック
+function checkSearchCode() {
+    const code = document.getElementById('searchCode').value;
+    if(code === '4238') {
+        document.getElementById('searchError').style.display = 'none';
+        document.getElementById('caseId').textContent = code;
+        navigate(4);
+    } else {
+        document.getElementById('searchError').style.display = 'block';
+        
+        // 入力フィールドを揺らすアニメーション
+        const input = document.getElementById('searchCode');
+        input.style.animation = 'shake 0.5s';
+        setTimeout(() => {
+            input.style.animation = '';
+        }, 500);
+    }
+}
+
+        // ファイルプレビュー
+        function previewFile() {
+            const fileInput = document.getElementById('fileInput');
+            const preview = document.getElementById('filePreview');
+            const file = fileInput.files[0];
+            
+            if (!file) return;
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const fileType = file.type.split('/')[0];
+                let fileIcon = 'fa-file';
+                let fileIconColor = '#1e3668';
+                
+                if (fileType === 'image') {
+                    fileIcon = 'fa-file-image';
+                    fileIconColor = '#FF9800';
+                } else if (fileType === 'application' && file.name.endsWith('.pdf')) {
+                    fileIcon = 'fa-file-pdf';
+                    fileIconColor = '#d90000';
+                } else if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
+                    fileIcon = 'fa-file-excel';
+                    fileIconColor = '#10793F';
+                } else if (file.name.endsWith('.docx') || file.name.endsWith('.doc')) {
+                    fileIcon = 'fa-file-word';
+                    fileIconColor = '#2A5699';
+                } else if (file.name.endsWith('.zip') || file.name.endsWith('.rar')) {
+                    fileIcon = 'fa-file-archive';
+                    fileIconColor = '#795548';
+                }
+                
+                const fileSize = (file.size / (1024 * 1024)).toFixed(2);
+                
+                const fileElement = document.createElement('div');
+                fileElement.className = 'file-item';
+                fileElement.innerHTML = `
+                    <div class="file-icon" style="color:${fileIconColor}">
+                        <i class="fas ${fileIcon}"></i>
+                    </div>
+                    <div class="file-info">
+                        <div class="file-name">${file.name}</div>
+                        <div class="file-meta">${file.type || '不明なファイル形式'}・${fileSize}MB</div>
+                    </div>
+                    <div class="file-actions">
+                        <button class="btn-download" onclick="downloadFile('${file.name}', '${e.target.result}')">
+                            <i class="fas fa-download"></i> ダウンロード
+                        </button>
+                    </div>
+                `;
+                
+                preview.prepend(fileElement);
+            };
+            
+            reader.readAsDataURL(file);
+        }
+
+        // ダウンロード関数
+        function downloadFile(filename, dataUrl) {
+            const link = document.createElement('a');
+            link.href = dataUrl;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // 日付表示を更新
+        function updateDate() {
+            const today = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                weekday: 'long'
+            };
+            document.getElementById('currentDate').textContent = today.toLocaleDateString('ja-JP', options);
+        }
+        
+        // ニュース記事を動的に生成
+        function generateNews() {
+            const newsList = document.getElementById('newsList');
+            const today = new Date();
+            
+            const newsItems = [
+                "「令和5年秋の全国交通安全運動」の実施について",
+                "「STOP! 特殊詐欺」キャンペーンの実施について",
+                "空き巣被害の防止対策について",
+                "迷惑メール・悪質商法に関する注意喚起",
+                "自転車盗難防止キャンペーンの実施について"
+            ];
+            
+            newsList.innerHTML = '';
+            
+            newsItems.forEach((item, index) => {
+                const newsDate = new Date(today);
+                newsDate.setDate(today.getDate() - (index + 1));
+                
+                const formattedDate = newsDate.toISOString().split('T')[0];
+                
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <time>${formattedDate}</time>
+                    <a href="#" class="nav-link">${item}</a>
+                `;
+                newsList.appendChild(li);
+            });
+        }
+        
+        // 行事予定の日付を更新
+        function updateEventDates() {
+            const today = new Date();
+            
+            // 行事1: 5日後
+            const eventDate1 = new Date(today);
+            eventDate1.setDate(today.getDate() + 5);
+            document.getElementById('eventDate1').textContent = `(${eventDate1.getDate()}日)`;
+            document.getElementById('eventDateFull1').textContent = 
+                `${eventDate1.getFullYear()}年${eventDate1.getMonth()+1}月${eventDate1.getDate()}日`;
+            
+            // 行事2: 10日後
+            const eventDate2 = new Date(today);
+            eventDate2.setDate(today.getDate() + 10);
+            document.getElementById('eventDate2').textContent = `(${eventDate2.getDate()}日)`;
+            document.getElementById('eventDateFull2').textContent = 
+                `${eventDate2.getFullYear()}年${eventDate2.getMonth()+1}月${eventDate2.getDate()}日`;
+                
+            // ファイルページの日付更新
+            const reportDate = new Date(today);
+            reportDate.setDate(today.getDate() - 1);
+            document.getElementById('reportDate').textContent = 
+                `${reportDate.getFullYear()}${String(reportDate.getMonth()+1).padStart(2, '0')}${String(reportDate.getDate()).padStart(2, '0')}`;
+            
+            const victimDate = new Date(today);
+            victimDate.setDate(today.getDate() - 2);
+            document.getElementById('victimDate').textContent = 
+                `${victimDate.getFullYear()}${String(victimDate.getMonth()+1).padStart(2, '0')}`;
+            
+            // ファイルページの日付
+            const fileDate = new Date(today);
+            document.getElementById('fileDate').textContent = 
+                `${fileDate.getFullYear()}年${fileDate.getMonth()+1}月${fileDate.getDate()}日`;
+        }
+
+        // イベントリスナーの設定
+        function setupEventListeners() {
+            // 認証ボタン
+            document.getElementById('authButton').addEventListener('click', checkAuthCode);
+            
+            // 検索ボタン
+            document.getElementById('searchButton').addEventListener('click', checkSearchCode);
+            
+            // 戻るボタン
+            document.getElementById('backButton').addEventListener('click', () => navigate(1));
+            
+            // ファイル入力
+            document.getElementById('fileInput').addEventListener('change', previewFile);
+            
+            // ナビゲーションリンク
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    navigate(3); // 検索ページに遷移
+                });
+            });
+        }
+
+        // 初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDate();
+            generateNews();
+            updateEventDates();
+            setupEventListeners();
+            
+            // アニメーションスタイルを追加
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                    20%, 40%, 60%, 80% { transform: translateX(5px); }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>
